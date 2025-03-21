@@ -1,0 +1,4 @@
+{
+  "/api/generate-cutting-list/route": "app/api/generate-cutting-list/route.js",
+  "/page": "app/page.js"
+}

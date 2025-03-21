@@ -1,0 +1,1727 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+.sort-icon {
+  cursor: pointer;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+}
+
+.sort-icon:hover {
+  opacity: 1;
+}
+
+.sort-icon.bi-arrow-up,
+.sort-icon.bi-arrow-down {
+  opacity: 1;
+  color: #4b8d5a;
+}
+
+th {
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+th:hover .sort-icon {
+  opacity: 1;
+}
+
+.download-options {
+  min-width: 150px;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 0;
+}
+
+.download-options .dropdown-item {
+  padding: 8px 16px;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.download-options .dropdown-item:hover {
+  background-color: #4b8d5a;
+  color: white;
+}
+
+.cabinet-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 3px;
+  padding-right: 5px;
+}
+
+.cabinet-form {
+  border: 1px solid #ddd;
+  padding: 8px 8px 8px 8px;
+  border-radius: 15px;
+  width: 100%;
+  background-color: white;
+  transition: transform 0.3s ease, z-index 0.3s ease;
+  margin-bottom: 8px;
+  position: static;
+  left: 0;
+  right: 0;
+}
+
+.cabinet-form:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}
+
+.cabinet-form h5 {
+  margin-top: 0;
+  padding: 0px;
+  background-color: #ffffff;
+}
+
+.cabinet-form .form-content {
+  padding: 0px;
+}
+
+.cabinet-form .card-title {
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cabinet-form .form-group {
+  margin-bottom: 1.2rem;
+}
+
+.cabinet-form .form-label {
+  color: #000000;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.cabinet-form .form-control {
+  border-radius: 8px;
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  height: 38px;
+}
+
+.cabinet-form .form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.cabinet-form .input-group-text {
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  color: #2c3e50;
+  border-radius: 0 8px 8px 0;
+  width: 45px;
+  justify-content: center;
+}
+
+.cabinet-form.active {
+  z-index: 1001 !important;
+}
+
+.delete-btn {
+  position: static;
+  bottom: 0px;
+  left: 0px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0px 0px;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.5;
+  width: 50px;
+  height: 22px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.delete-btn i {
+  font-size: 18px;
+}
+
+.btn {
+  border-radius: 7px;
+  width: auto;
+  min-width: fit-content;
+  max-width: 100%;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+}
+
+.wall-cabinet-btn {
+  width: auto;
+}
+
+.minus-btn,
+.plus-btn {
+  margin-left: 5px;
+  position: static;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0px 0px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.5;
+  width: 50px;
+  height: 22px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.minus-btn {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  box-shadow: 0 2px 8px rgba(230, 126, 34, 0.2);
+}
+
+.plus-btn {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.2);
+}
+
+.quantity-indicator {
+  margin-left: 5px;
+  position: static;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 10px;
+  padding: 0px 0px;
+  box-shadow: 0 2px 8px rgba(110, 109, 109, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.5;
+  width: 50px;
+  height: 22px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.quantity-indicator.animate {
+  animation: heartbeat 0.5s ease-in-out;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  position: static;
+  bottom: 0;
+  right: 0;
+}
+
+.board {
+  width: 100%;
+  height: 0;
+  padding-bottom: calc(1220 / 2440 * 100%); /* Maintains 2440x1220 aspect ratio */
+  position: relative;
+  background: #fff;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 20px
+  );
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  display: block;
+  box-sizing: border-box;
+}
+
+.pieces-container {
+  position: absolute;
+  top: 10mm;
+  left: 10mm;
+  right: 10mm;
+  bottom: 10mm;
+  width: calc(100% - 20mm);
+  height: calc(100% - 20mm);
+}
+
+.piece {
+  position: absolute;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 4px;
+  overflow: visible; /* Changed from hidden to visible */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.piece[data-material="particle"] {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.2);
+}
+
+.piece[data-material="mdf"] {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+}
+
+.piece[data-material="backply"] {
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  box-shadow: 0 4px 15px rgba(241, 196, 15, 0.2);
+}
+
+.piece:hover {
+  transform: scale(1.05);
+  z-index: 100;
+}
+
+.piece[data-material="particle"]:hover {
+  box-shadow: 0 8px 25px rgba(46, 204, 113, 0.3);
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.piece[data-material="mdf"]:hover {
+  box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+  background: linear-gradient(135deg, #2980b9, #3498db);
+}
+
+.piece[data-material="backply"]:hover {
+  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.3);
+  background: linear-gradient(135deg, #f39c12, #f1c40f);
+}
+
+.piece-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: min(2.2vh, 2.2vw); /* Increased base font size */
+  line-height: 1.2;
+  word-break: break-word;
+  transform-origin: center center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 4px;
+}
+
+.piece-label.rotated {
+  transform: rotate(90deg) scale(1.2); /* Added scale to make rotated text larger */
+  width: 100%;
+  height: 100%;
+}
+
+.piece-name {
+  font-weight: 500;
+  margin-bottom: 2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.piece-dimensions {
+  font-size: 0.9em; /* Slightly increased from 0.85em */
+  opacity: 0.95; /* Increased from 0.9 for better visibility */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.piece:hover .piece-label {
+  white-space: normal;
+  overflow: visible;
+  z-index: 100;
+  transform: rotate(90deg) scale(1.3); /* Added scale to make text even larger on hover for rotated pieces */
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+#visualization h3 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.slide-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide-modal-content {
+  background: white;
+  width: 50%;
+  max-width: 500px;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.slide-modal-header {
+  margin-bottom: 20px;
+}
+
+.slide-modal-body {
+  margin-bottom: 20px;
+}
+
+.slide-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.slide-modal-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slide-modal-btn.cancel {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.slide-modal-btn.download {
+  background: linear-gradient(135deg, #4b8d5a, #3b7248);
+  color: white;
+  border: none;
+}
+
+.slide-modal-btn.cancel:hover {
+  background: #e9e9e9;
+}
+
+.slide-modal-btn.download:hover {
+  background: linear-gradient(135deg, #3c7248, #2b613a);
+}
+
+.template-selector {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.template-btn {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.template-btn.active {
+  border-color: #4b8d5a;
+  background: rgba(75, 141, 90, 0.1);
+  color: #4b8d5a;
+  font-weight: 600;
+}
+
+.template-btn:hover {
+  background: #f9f9f9;
+}
+
+.board-label {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.board-dimensions {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.board-header {
+  position: absolute;
+  top: -40px; /* Position above the board */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.card-title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  color: #ffffff;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.input-group-text {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: none;
+  font-weight: 500;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-weight: 500;
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.card {
+  background: linear-gradient(45deg, #4e54c8, #8f94fb);
+  border: none;
+  border-radius: 15px;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.dimension-group {
+  margin-bottom: 1.5rem;
+}
+
+.dimension-group:last-child {
+  margin-bottom: 0;
+}
+
+.card-title,
+.form-label {
+  color: #333333;
+  font-weight: 500;
+}
+
+.input-group-text {
+  color: #333333;
+}
+
+.form-control {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  color: #333333;
+}
+
+.form-control:focus {
+  background-color: #ffffff;
+  border-color: #80bdff;
+  color: #333333;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+}
+
+.input-group {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.input-group .form-control {
+  width: 120px !important;
+  flex: none;
+}
+
+/* Add these styles to the existing <style> section */
+.card-body {
+  position: relative;
+}
+
+.visualize-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.visualize-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+
+.visualize-btn i {
+  font-size: 1rem;
+}
+
+/* Granite slab description styles */
+.slab-description {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0px;
+  border-radius: 15px;
+  background: #ffffff00;
+  min-width: 400px;
+  width: fit-content;
+}
+
+.slab-size-selector {
+  position: relative;
+  cursor: pointer;
+  padding: 2px 24px 2px 8px;
+  border: none;
+  border-radius: 15px;
+  background: #ffffff00;
+  min-width: 120px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.slab-size-selector::after {
+  content: "▼";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+}
+
+.slab-size-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000;
+  min-width: 120px;
+}
+
+.slab-size-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.slab-size-option:hover {
+  background: #f5f5f5;
+}
+
+.slab-lengths {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+/* Modern add length button */
+.add-length-btn {
+  cursor: pointer;
+  color: #4caf50;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  background: #f0f9f0;
+}
+
+.add-length-btn:hover {
+  background: #e8f5e9;
+  transform: scale(1.05);
+}
+
+.length-input {
+  width: 100px;
+  padding: 6px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background: #f8f9fa;
+}
+
+.length-input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.lengths-list {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: none;
+  min-width: 200px;
+  z-index: 1000;
+  padding: 8px;
+  width: max-content;
+}
+
+.length-item {
+  padding: 8px 12px;
+  margin: 4px 0;
+  border-radius: 6px;
+  background: #f8f9fa;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  min-width: 150px;
+}
+
+.length-item:hover {
+  background: #f0f0f0;
+}
+
+.delete-length {
+  color: #dc3545;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  margin-left: 12px;
+}
+
+.delete-length:hover {
+  background: rgba(220, 53, 69, 0.1);
+}
+
+.length-item span:first-child {
+  flex: 1;
+  min-width: 80px;
+}
+
+.slab-description > span:first-child {
+  flex-shrink: 0;
+}
+
+/* Worktop table styles */
+.table-condensed td {
+  padding-right: 0;
+  max-width: 300px;
+}
+
+.table-condensed td:first-child {
+  width: auto;
+  padding-right: 0;
+}
+
+.table-condensed td:nth-child(2) {
+  padding-left: 8px;
+}
+
+/* Make both tables consistent */
+.table-condensed {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table-condensed th:first-child,
+.table-condensed td:first-child {
+  width: 40%;
+}
+
+.table-condensed th:not(:first-child),
+.table-condensed td:not(:first-child) {
+  width: 15%;
+}
+
+/* Add these styles to your existing <style> section */
+#quotationBody tr,
+#worktopQuotationBody tr {
+  background: transparent;
+  border-radius: 0 15px 15px 0;
+  transition: all 0.2s ease;
+}
+
+#quotationBody tr:nth-child(odd),
+#worktopQuotationBody tr:nth-child(odd) {
+  background: #f0f2f5;
+  border-radius: 16px;
+}
+
+#quotationBody tr:nth-child(even),
+#worktopQuotationBody tr:nth-child(even) {
+  background: #ffffff;
+}
+
+#quotationBody tr:nth-child(odd) td:first-child,
+#worktopQuotationBody tr:nth-child(odd) td:first-child {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+#quotationBody tr:nth-child(odd) td:last-child,
+#worktopQuotationBody tr:nth-child(odd) td:last-child {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background: #f0f2f5;
+}
+
+#quotationBody tr:nth-child(odd):hover,
+#worktopQuotationBody tr:nth-child(odd):hover {
+  background: #e9ecef;
+}
+
+#quotationBody tr:nth-child(odd):hover td:last-child,
+#worktopQuotationBody tr:nth-child(odd):hover td:last-child {
+  background: #e9ecef;
+}
+
+/* Add spacing between rows */
+#quotationBody tr,
+#worktopQuotationBody tr {
+  border-bottom: 4px solid transparent;
+}
+
+/* Style for the table headers */
+#quotationSection thead th:first-child {
+  border-top-left-radius: 16px;
+}
+
+#quotationSection thead th:last-child {
+  border-top-right-radius: 16px;
+}
+
+/* Add subtle shadow to the quotation section */
+#quotationSection .table {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  border-spacing: 0 4px;
+  border-collapse: separate;
+}
+
+/* Remove default table borders and adjust padding */
+#quotationSection .table td,
+#quotationSection .table th {
+  border: none;
+  padding: 8px;
+}
+
+/* Style the header row */
+#quotationSection thead tr {
+  background: #ffffff;
+}
+
+/* Update the padding for odd rows */
+#quotationBody tr:nth-child(odd) td,
+#worktopQuotationBody tr:nth-child(odd) td {
+  padding: 10px 8px;
+}
+
+/* Keep even rows with standard padding */
+#quotationBody tr:nth-child(even) td,
+#worktopQuotationBody tr:nth-child(even) td {
+  padding: 5px 8px;
+}
+
+/* Update the header padding to match */
+#quotationSection .table th {
+  padding: 8px;
+}
+
+/* Add or update these styles */
+#quotationSection {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#quotationSection .container {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: 100%;
+}
+
+#quotationSection .table {
+  margin-bottom: 0;
+}
+
+/* Update the table cell padding */
+#quotationSection .table td,
+#quotationSection .table th {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Maintain vertical padding for odd/even rows */
+#quotationBody tr:nth-child(odd) td,
+#worktopQuotationBody tr:nth-child(odd) td {
+  padding: 10px 8px;
+}
+
+#quotationBody tr:nth-child(even) td,
+#worktopQuotationBody tr:nth-child(even) td {
+  padding: 5px 8px;
+}
+
+/* Update header padding */
+#quotationSection .table th {
+  padding: 8px 8px;
+}
+
+/* Add these styles for numerical data in quotation */
+#quotationBody td:nth-child(2) /* units */,
+#quotationBody td:nth-child(3) /* qty */,
+#quotationBody td:nth-child(4) /* unit price */,
+#quotationBody td:nth-child(5) /* total */,
+#worktopQuotationBody td:nth-child(2),
+#worktopQuotationBody td:nth-child(3),
+#worktopQuotationBody td:nth-child(4),
+#worktopQuotationBody td:nth-child(5),
+#quotationSection .total-row td:last-child,
+#quotationSection #subtotal,
+#quotationSection #labourAmount,
+#quotationSection #totalAmount,
+#quotationSection #worktopTotal {
+  font-family: "SF Mono", SFMono-Regular, ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace;
+  font-size: 1.09rem;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  color: #2c3e50;
+  text-align: left;
+}
+
+/* Style for the header numbers */
+#quotationSection th:not(:first-child) {
+  font-family: "SF Mono", SFMono-Regular, ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: left;
+}
+
+/* Update the styles for all table cells including descriptions */
+#quotationBody td /* All columns including description */,
+#worktopQuotationBody td,
+#quotationSection .total-row td,
+#quotationSection #subtotal,
+#quotationSection #labourAmount,
+#quotationSection #totalAmount,
+#quotationSection #worktopTotal {
+  font-family: "SF Mono", SFMono-Regular, ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace;
+  font-size: 1.09rem;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  color: #2c3e50;
+  text-align: left;
+}
+
+/* Style for all headers */
+#quotationSection th {
+  font-family: "SF Mono", SFMono-Regular, ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace;
+  font-size: 1.2rem;
+  font-weight: 700; /* Make headers bold */
+  color: #2c3e50;
+  text-align: left;
+}
+
+/* Make footer totals bold */
+#quotationSection .total-row td,
+#quotationSection #subtotal,
+#quotationSection #labourAmount,
+#quotationSection #totalAmount,
+#quotationSection #worktopTotal,
+.total-label {
+  /* Add this class to your total/subtotal label cells */
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Style for the total row labels */
+#quotationSection .total-row td:first-child {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+/* Update footer padding */
+#quotationSection tfoot td {
+  padding: 10px 8px; /* 10px vertical, 8px horizontal */
+}
+
+/* Style for the total row labels and values in footer */
+#quotationSection .total-row td:first-child,
+#quotationSection #subtotal,
+#quotationSection #labourAmount,
+#quotationSection #totalAmount,
+#quotationSection #worktopTotal,
+.total-label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px 8px; /* 10px vertical, 8px horizontal */
+}
+
+/* Add a bit more padding to the final total row */
+#quotationSection .total-row:last-child td {
+  padding: 12px 8px; /* 12px vertical, 8px horizontal */
+}
+
+/* Update footer label padding */
+#quotationSection tfoot td:first-child {
+  padding: 10px 8px; /* 10px vertical, 8px horizontal */
+  text-align: left;
+}
+
+/* Style for the total row labels and values in footer */
+#quotationSection .total-row td:first-child {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px 8px; /* 10px vertical, 8px horizontal */
+  text-align: left;
+}
+
+/* Style for the final total row */
+#quotationSection .total-row:last-child td:first-child {
+  padding: 12px 8px; /* slightly more padding for the final row */
+  font-weight: 600;
+}
+
+/* Ensure consistent padding for all footer cells */
+#quotationSection tfoot td {
+  padding: 10px 8px;
+}
+
+/* Specific style for the labour percentage cell */
+#quotationSection .labour-percentage {
+  padding: 10px 8px;
+  text-align: left;
+}
+
+.template-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.template-btn {
+  flex: 1;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.template-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.template-btn.active {
+  background: #2ecc71;
+  border-color: #27ae60;
+}
+
+/* Update styles for rotated pieces */
+.piece.rotated .piece-content {
+  transform: rotate(-90deg);
+}
+
+.piece.rotated {
+  margin: 2mm; /* Add margin for kerf spacing */
+}
+
+/* Specific adjustments for screw plates and blanking panels */
+.piece[data-name*="plate"],
+.piece[data-name*="blanking"] {
+  margin: 2mm;
+}
+
+.piece[data-name*="plate"] {
+  margin: 2mm;
+  z-index: 2;
+}
+
+.piece[data-name*="blanking"] {
+  margin: 2mm;
+  z-index: 1;
+}
+
+.visualization-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.board-container {
+  position: relative;
+  margin: 2rem 0;
+  background: #f8f9fa;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 100%;
+  margin: 3rem 0;
+  box-sizing: border-box;
+}
+
+.board-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Add styles for the board statistics cards */
+#boardStats .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#boardStats .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+#boardStats i {
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .piece-dimensions {
+    font-size: 10px;
+  }
+
+  .board {
+    min-height: 300px;
+  }
+  
+  /* Adjust cabinet forms container */
+  .cabinet-container {
+    max-height: none;
+    overflow-y: visible;
+    padding: 0;
+  }
+  
+  /* Adjust the cutting list results section */
+  #results {
+    padding: 10px;
+  }
+  
+  /* Make the summary cards more readable on mobile */
+  #cuttingListSummary .card {
+    margin-bottom: 10px;
+  }
+  
+  /* Ensure board visualization fits on mobile */
+  .board-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+/* Styles for material toggle buttons */
+.material-btn {
+  padding: 12px 20px;
+  margin-right: 8px;
+  border-radius: 16px;
+}
+
+.material-btn.active {
+  background: linear-gradient(45deg, #4e54c8, #8f94fb);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(78, 84, 200, 0.3);
+  font-weight: 600;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-action-buttons .dropdown-toggle {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  
+  .mobile-action-buttons .dropdown-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .wall-cabinet-btn {
+    width: 100%;
+  }
+  
+  .cabinet-container {
+    max-height: none;
+    overflow-y: visible;
+    padding: 0;
+  }
+
+  .col-md-2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Adjust column widths on mobile */
+  #cabinetForms .col-md-2 {
+    width: 100%;
+  }
+  
+  /* Make cabinet forms more compact on mobile */
+  .cabinet-form {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Adjust headings on mobile */
+  h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Make form controls more touch-friendly */
+  .form-control, .form-select {
+    height: 42px;
+    font-size: 1rem;
+  }
+  
+  /* Adjust client modal for mobile */
+  .slide-modal-content {
+    width: 90%;
+    max-width: 90%;
+    padding: 1rem;
+  }
+  
+  /* Make modern buttons responsive */
+  .modern-btn {
+    width: 98%;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  
+  .modern-dropdown-menu {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .dropdown {
+    width: 100%;
+  }
+  
+  /* Adjust spacing for icons in buttons */
+  .modern-btn i {
+    margin-right: 8px;
+  }
+  
+  /* Make the cutting list table scroll horizontally */
+  .table-responsive {
+    overflow-x: auto;
+  }
+}
+
+/* Small phones */
+@media (max-width: 576px) {
+  .cabinet-form .button-group {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .delete-btn, .minus-btn, .plus-btn {
+    width: 40px;
+    height: 30px;
+    margin-top: 5px;
+  }
+  
+  .quantity-indicator {
+    width: 40px;
+    height: 30px;
+    margin-top: 5px;
+  }
+}
+
+/* Modern button styles */
+.modern-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+
+.modern-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.modern-btn.success {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.modern-btn.visualize-btn {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.modern-btn.quotation-btn {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+}
+
+.modern-btn.dropdown-toggle::after {
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.modern-dropdown-menu {
+  background: white;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 8px;
+  min-width: 200px;
+}
+
+/* Mobile action buttons layout */
+.mobile-action-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.mobile-action-buttons .top-row,
+.mobile-action-buttons .middle-row,
+.mobile-action-buttons .bottom-row {
+  width: 100%;
+}
+
+.mobile-action-buttons .download-btn-container {
+  width: 100%;
+}
+
+.mobile-action-buttons .visualize-btn,
+.mobile-action-buttons .quotation-btn {
+  width: 98%;
+  margin: 0 auto;
+  display: block;
+  justify-content: center;
+}
+
+.mobile-action-buttons .modern-btn {
+  margin-bottom: 0;
+}
+
+/* Hover effects for the action buttons */
+.mobile-action-buttons .visualize-btn:hover {
+  background: linear-gradient(135deg, #8e44ad, #9b59b6);
+}
+
+.mobile-action-buttons .quotation-btn:hover {
+  background: linear-gradient(135deg, #d35400, #e67e22);
+}
+
+@media (min-width: 769px) {
+  .mobile-action-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .mobile-action-buttons .top-row,
+  .mobile-action-buttons .middle-row,
+  .mobile-action-buttons .bottom-row {
+    width: auto;
+    margin: 0;
+  }
+  
+  .mobile-action-buttons .visualize-btn,
+  .mobile-action-buttons .quotation-btn {
+    width: auto;
+    min-width: 200px;
+    display: inline-flex;
+    margin: 0;
+  }
+  
+  .mobile-action-buttons .download-btn-container {
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+.mobile-action-buttons .dropdown-menu {
+  width: 100%;
+  min-width: 200px;
+  margin-top: 0;
+  border-radius: 14px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.mobile-action-buttons .dropdown-item {
+  padding: 10px 16px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.mobile-action-buttons .dropdown-item:hover,
+.mobile-action-buttons .dropdown-item:focus {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+@media (max-width: 768px) {
+  .mobile-action-buttons .dropdown-toggle {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  
+  .mobile-action-buttons .dropdown-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .wall-cabinet-btn {
+    width: 100%;
+  }
+  
+  .cabinet-container {
+    max-height: none;
+    overflow-y: visible;
+    padding: 0;
+  }
+
+  .col-md-2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Adjust column widths on mobile */
+  #cabinetForms .col-md-2 {
+    width: 100%;
+  }
+  
+  /* Make cabinet forms more compact on mobile */
+  .cabinet-form {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* Adjust headings on mobile */
+  h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Make form controls more touch-friendly */
+  .form-control, .form-select {
+    height: 42px;
+    font-size: 1rem;
+  }
+  
+  /* Adjust client modal for mobile */
+  .slide-modal-content {
+    width: 90%;
+    max-width: 90%;
+    padding: 1rem;
+  }
+  
+  /* Make modern buttons responsive */
+  .modern-btn {
+    width: 98%;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  
+  .modern-dropdown-menu {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .dropdown {
+    width: 100%;
+  }
+  
+  /* Adjust spacing for icons in buttons */
+  .modern-btn i {
+    margin-right: 8px;
+  }
+  
+  /* Make the cutting list table scroll horizontally */
+  .table-responsive {
+    overflow-x: auto;
+  }
+}
+
+/* Small phones */
+@media (max-width: 576px) {
+  .cabinet-form .button-group {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .delete-btn, .minus-btn, .plus-btn {
+    width: 40px;
+    height: 30px;
+    margin-top: 5px;
+  }
+  
+  .quantity-indicator {
+    width: 40px;
+    height: 30px;
+    margin-top: 5px;
+  }
+}
+
