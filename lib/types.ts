@@ -8,9 +8,16 @@ export interface CabinetItem {
   grooving: string
 }
 
+export interface UsedSpace {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
 export interface Board {
   pieces: BoardPiece[]
-  usedSpaces: { x: number; y: number; width: number; height: number }[]
+  usedSpaces: UsedSpace[]
 }
 
 export interface BoardPiece {

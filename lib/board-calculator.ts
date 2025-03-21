@@ -24,7 +24,8 @@ export function calculateBoardRequirements(cuttingList: CabinetItem[]) {
         if (item.edging.includes("W2")) particleBoardEdgingLength += item.width * quantity
       }
 
-      if (item.grooving && item.grooving.includes("G1")) {
+      // Match the original HTML implementation, looking for 'G' instead of 'G1'
+      if (item.grooving && item.grooving.includes("G")) {
         particleBoardGroovingLength += item.length * quantity
       }
     } else if (item.material === "18mm MDF board") {
@@ -38,7 +39,8 @@ export function calculateBoardRequirements(cuttingList: CabinetItem[]) {
         if (item.edging.includes("W2")) mdfBoardEdgingLength += item.width * quantity
       }
 
-      if (item.grooving && item.grooving.includes("G1")) {
+      // Match the original HTML implementation, looking for 'G' instead of 'G1'
+      if (item.grooving && item.grooving.includes("G")) {
         mdfBoardGroovingLength += item.length * quantity
       }
     } else if (item.material === "3mm MDF Backply") {
@@ -46,62 +48,57 @@ export function calculateBoardRequirements(cuttingList: CabinetItem[]) {
     }
   })
 
-  // Calculate board requirements using the packing algorithm
+  // Calculate actual board requirements using the packing algorithm
   const standardBoard = { width: 2440, length: 1220 }
   const kerfWidth = 4
   const edgeOffset = 10
 
   // Group pieces by material
-  const particleBoards = calculateBoardsForMaterial(
-    cuttingList,
-    "18mm Particle Board",
-    standardBoard,
-    kerfWidth,
-    edgeOffset,
-  )
-  const mdfBoards = calculateBoardsForMaterial(cuttingList, "18mm MDF board", standardBoard, kerfWidth, edgeOffset)
-  const mdfBackply = calculateBoardsForMaterial(cuttingList, "3mm MDF Backply", standardBoard, kerfWidth, edgeOffset)
+  const materialGroups = {
+    particle: [] as CabinetItem[],
+    mdf: [] as CabinetItem[],
+    backply: [] as CabinetItem[],
+  }
+
+  // Group pieces by material and expand quantities
+  cuttingList.forEach((item) => {
+    // Add each piece according to its quantity
+    for (let i = 0; i < item.quantity; i++) {
+      const piece = {
+        name: item.name,
+        length: item.length,
+        width: item.width,
+        quantity: 1,
+        material: item.material,
+        edging: item.edging,
+        grooving: item.grooving,
+      }
+
+      if (item.material === "18mm Particle Board") {
+        materialGroups.particle.push(piece)
+      } else if (item.material === "18mm MDF board") {
+        materialGroups.mdf.push(piece)
+      } else if (item.material === "3mm MDF Backply") {
+        materialGroups.backply.push(piece)
+      }
+    }
+  })
+
+  // Calculate boards needed for each material
+  const boardCounts = {
+    particle: packPieces(materialGroups.particle, standardBoard, kerfWidth, edgeOffset).length,
+    mdf: packPieces(materialGroups.mdf, standardBoard, kerfWidth, edgeOffset).length,
+    backply: packPieces(materialGroups.backply, standardBoard, kerfWidth, edgeOffset).length,
+  }
 
   return {
-    particleBoards,
-    mdfBoards,
-    mdfBackply,
+    particleBoards: boardCounts.particle,
+    mdfBoards: boardCounts.mdf,
+    mdfBackply: boardCounts.backply,
     particleBoardEdgingLength,
     mdfBoardEdgingLength,
     particleBoardGroovingLength,
     mdfBoardGroovingLength,
   }
-}
-
-function calculateBoardsForMaterial(
-  cuttingList: CabinetItem[],
-  material: string,
-  boardSize: { width: number; length: number },
-  kerfWidth: number,
-  edgeOffset: number,
-): number {
-  // Filter pieces by material and expand quantities
-  const pieces: CabinetItem[] = []
-  cuttingList
-    .filter((item) => item.material === material)
-    .forEach((item) => {
-      for (let i = 0; i < item.quantity; i++) {
-        pieces.push({
-          name: item.name,
-          length: item.length,
-          width: item.width,
-          quantity: 1,
-          material: item.material,
-          edging: item.edging,
-          grooving: item.grooving,
-        })
-      }
-    })
-
-  // Pack pieces onto boards
-  const boards = packPieces(pieces, boardSize, kerfWidth, edgeOffset)
-
-  // Return the number of boards required
-  return boards.length
 }
 
